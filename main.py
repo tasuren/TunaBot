@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 
 from os import listdir
+from ujson import load
 
 
 print("Now loading...")
@@ -11,13 +12,15 @@ print("Now loading...")
 
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix="t!", intents=intents)
+with open("data.json", "r") as f:
+    bot.data = load(f)
 
 
 # エクステンションのロードをする。
 bot.load_extension("jishaku")
 ## cogフォルダにあるものを全て読み込む。
-for filename in listdir:
-    if not filename.startswith("_"):
+for filename in listdir("cog"):
+    if not filename.startswith("_") and filename.endswith(".py"):
         bot.load_extension(f"cog.{filename[:-3]}")
 
 
@@ -27,4 +30,4 @@ async def on_ready():
     print("Connected")
 
 
-bot.run("ODE5MTIwNTc1MTgwMDQ2MzU4.YEh_ew.mmlJCSJllvaEfWcmwKdX2eQiiUs")
+bot.run(bot.data["token"])
