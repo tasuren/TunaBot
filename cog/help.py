@@ -31,7 +31,7 @@ class Help(commands.Cog):
                 description = self.data[key[0]][key[1]]
             elif len(key) == 1:
                 title = f"{cmd}のHELP"
-                description = "\n".join(f"{key}`" for key in self.data[category])
+                description = "\n".join(f"`{key}`" for key in self.data[category])
             else:
                 title, description = "HELP", "見つかりませんでした。"
         else:
