@@ -18,6 +18,8 @@ with open("data.json", "r") as f:
 
 # エクステンションのロードをする。
 bot.load_extension("jishaku")
+# その他色々をする。
+bot.remove_command("help")
 ## cogフォルダにあるものを全て読み込む。
 for filename in listdir("cog"):
     if not filename.startswith("_") and filename.endswith(".py"):
