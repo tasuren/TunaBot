@@ -3,8 +3,8 @@
 import discord
 from discord.ext import commands, tasks
 
+from aiofiles import open as async_open
 from aiohttp import ClientSession
-from aiofile import async_open
 from ujson import load, dumps
 from os.path import exists
 
@@ -43,6 +43,9 @@ class EEW(commands.Cog):
                             title=data["Title"]["String"],
                             description=data["Title"]["Detail"]
                         )
+                        embed.add_field(name="Place", value=data["Hypocenter"]["Name"])
+                        embed.add_field(name="MaxIntensity", value=data["MaxIntensity"]["String"])
+                        embed.add_field(name="OriginTime", value=data["OriginTime"]["String"])
                     else:
                         break
                 else:
