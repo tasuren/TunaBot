@@ -7,6 +7,7 @@ from aiofiles import open as async_open
 from aiohttp import ClientSession
 from ujson import load, dumps
 from os.path import exists
+from time import time
 
 
 class EEW(commands.Cog):
@@ -20,6 +21,8 @@ class EEW(commands.Cog):
             with open(self.JSON_PATH, "w") as f:
                 f.write('{"before": 0}')
             self.data = {}
+        if self.data["before"] == 0:
+            self.data["before"] = time()
         self.eew_send.start()
 
     @commands.command()
